@@ -59,3 +59,20 @@ export interface Session {
     nombre_places: number
     numero: string
   }
+
+  export interface User{
+    id:number
+    nom:string
+    prenom:string
+    email:string
+    date_naissance?:string
+    grade?:string
+    specialite?:string
+    role:string
+  }
+
+  export interface Connexion {
+    token:string
+    user:User
+  }
+

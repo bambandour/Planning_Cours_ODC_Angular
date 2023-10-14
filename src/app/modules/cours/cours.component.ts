@@ -3,9 +3,11 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Cours, Data } from 'src/app/interfaces/planning';
 import { CoursService } from 'src/app/services/cours.service';
 import { initFlowbite } from 'flowbite';
-import { Salle, Session } from 'src/app/cours';
+import { Salle, Session, User } from 'src/app/cours';
 import { SessionService } from 'src/app/services/session.service';
 import { min } from 'rxjs';
+import { LoginService } from 'src/app/services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cours',
@@ -25,9 +27,10 @@ export class CoursComponent {
   isModalOpen = false;
   salles:Salle[]=[]
   courId!:number
+  user:string|null=''
 
 
-  constructor(private fb:FormBuilder, private coursService:CoursService,private sessionservice:SessionService){
+  constructor(private fb:FormBuilder, private coursService:CoursService,private sessionservice:SessionService, private authService:LoginService,private router:Router){
     this.formGroup=this.fb.group({
       module:[''],
       prof:[''],
@@ -45,6 +48,10 @@ export class CoursComponent {
     initFlowbite();
     this.getAllCours()
     this.getSessionAndSalle()
+    let current_user=localStorage.getItem('current_user')
+    console.log(current_user);
+    this.user=current_user
+    
   }
   
   get classes() {
@@ -100,8 +107,8 @@ export class CoursComponent {
     //     this.formGroup.reset();
     // })
     }
-
-    // isSalleDispo(){
+  }
+  // isSalleDispo(){
     //   const cour=this.formGroup.value.cours
     //   this.cours.forEach(c => {
     //     if (cour===c.id) {
@@ -110,10 +117,12 @@ export class CoursComponent {
     //   });
     //   return
     // }
-    
-    
-
+  singUp(){
+    this.authService.logout().subscribe(res=>{
+      this.router.navigate(['']);
+    })
   }
+  
 
 
 

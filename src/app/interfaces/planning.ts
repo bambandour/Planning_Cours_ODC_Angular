@@ -1,7 +1,7 @@
 
 export interface Data {
     message: string
-    data: Cours[]
+    data: Cours[]|Session[]
     success?: boolean
     error?: string
 }
@@ -48,7 +48,7 @@ export interface Session {
     heure_debut: number
     heure_fin: number
     duree: number
-    cours: Cours
+    cours: Cours|number
     type_session: string
     salle: string
     etat: number
