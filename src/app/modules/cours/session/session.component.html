@@ -6,8 +6,11 @@
       <!-- Header -->
       <div class="fixed z-10 flex items-center justify-between w-full text-white h-14">
         <div class="flex items-center justify-start pl-3 bg-green-600 border-none md:justify-center w-14 md:w-64 h-14 dark:bg-gray-800">
-          <img class="mr-2 overflow-hidden rounded-md w-7 h-7 md:w-10 md:h-10" src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg" />
-          <span class="hidden md:block">Ahmadou Ndour </span>
+          <img class="mr-2 overflow-hidden rounded-md w-7 h-7 md:w-10 md:h-10" src="assets/img/odc.jpeg" />
+          <div>
+            <span class="hidden md:block text-white-900">Ahmadou Ndour</span>
+            <span class="hidden text-white-900 md:block">res@gmail.com</span>
+        </div>
         </div>
         <div class="flex items-center justify-between w-full bg-green-600 pl-7 h-14 dark:bg-gray-800 header-right">
           <div class="flex items-center w-full max-w-xl p-2 mr-4 bg-white border border-gray-200 rounded shadow-sm">
@@ -34,7 +37,6 @@
           </ul>
         </div>
       </div>
-      <!-- ./Header -->
     
       <!-- Sidebar -->
       <div class="fixed left-0 z-10 flex flex-col h-full text-white transition-all duration-300 bg-green-600 border-none top-14 w-14 hover:w-64 md:w-64 dark:bg-gray-900 sidebar">
@@ -58,7 +60,7 @@
                 <span class="inline-flex items-center justify-center ml-4">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
                 </span>
-                <span class="ml-2 text-sm tracking-wide truncate">Board</span>
+                <span class="ml-2 text-sm tracking-wide truncate">Registration</span>
                 <span class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-blue-500 bg-indigo-50 rounded-full">New</span>
               </a>
             </li>
@@ -106,9 +108,20 @@
           <p class="hidden px-5 py-3 text-xs text-center mb-14 md:block">Copyright @2023</p>
         </div>
       </div>
-      <div class="h-full mb-10 ml-14 mt-14 md:ml-64">
+      
+      <div class="h-full mb-10 ml-14 mt-14 md:ml-64" >
+        <div class="absolute pt-2 right-10">
+          <div>
+            <span class="text-blue-700"><i class="fa-solid fa-calendar-days"></i> </span>
+            <span class="p-2 font-bold text-red-500">2022-2023</span>
+          </div>
+          <div>
+            <span class="font-bold text-blue-700">Semestre: </span>
+            <span class="p-2 font-bold text-red-500">1</span>
+          </div>
+        </div>
         <h1 class="items-center justify-center pt-4 text-4xl text-center text-gray-600">Planning Session</h1>
-         <div id="calendar-container" class="calendar-container">
+         <div id="calendar-container" class="calendar-container" >
           <div id="cal-buttons" class="flex justify-between p-2">
               <div id="cal-date-nav-buttons justify-start p-2">
                   <button type="button" id="preivous" class="text-white bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" mwlCalendarPreviousView [(viewDate)]="viewDate" [view]="view" [excludeDays]="[0,6]" >previous</button>
@@ -124,13 +137,15 @@
                 <button type="button" id="day" (click)="setView(CalendarView.Day)" class="text-white bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Day</button>
               </div>
           </div>
-          <span [ngSwitch]="view">
+          <span [ngSwitch]="view"
+              >
               <mwl-calendar-month-view
                [viewDate]="viewDate" 
                *ngSwitchCase="CalendarView.Month" 
                [excludeDays]="[0,6]"  
                locale="fr"
                [events]="events"
+               (eventClicked)="onClickEvents($event)"
                ></mwl-calendar-month-view>
               <mwl-calendar-day-view 
               [viewDate]="viewDate" 
@@ -139,22 +154,58 @@
               [dayEndHour]="16" 
               locale="fr"
               [events]="events"
+              (eventClicked)="onClickEvents($event)"
               ></mwl-calendar-day-view>
               <mwl-calendar-week-view 
               [viewDate]="viewDate" 
               *ngSwitchCase="CalendarView.Week" 
-              [dayStartHour]="8" 
-              [dayEndHour]="16"  
-              [excludeDays]="[0,6]" 
+              [dayStartHour]="8"
+              [dayEndHour]="16"
+              [excludeDays]="[0,6]"
               locale="fr"
               [events]="events"
+              (eventClicked)="onClickEvents($event)"
               ></mwl-calendar-week-view>
-          </span>
-             
+          </span>   
          </div>
-        
-      
       </div>
 
     </div>
   </div>    
+
+  <div class="items-center text-center modal" *ngIf="isModalOpen" >
+    <div class="relative modal-content" >
+      <div class="modal-header">
+        <h4 class="text-red-500 modal-title">Session de cours</h4>
+        <button class=" close" (click)="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="flex justify-between">
+          <p>{{cal.cours.prof_module.prof}}</p>
+          <p>{{cal.cours.prof_module.module}}</p>
+        </div>
+        <p class="bg-gray-300 border border-gray-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 pb-2">Date: 2023-10-24</p>
+        <div class="flex justify-between pt-2">
+          <p>H_debut: {{cal.heure_debut}}</p>
+          <p>Heure fin: {{cal.heure_fin}}</p>
+        </div>
+        <div class="flex justify-between pt-2">
+          <p>Classe: {{cal.cours.annee_classe.classe.libelle}}</p>
+          <p>Salle: {{cal.salle}}</p>
+        </div>
+        <div class="flex justify-between pt-2">
+          <p>Durée: {{cal.duree}}h</p>
+          <p class="">État: {{ cal.etat === 0 ? 'En cours' : 'Terminé' }}</p>
+        </div>
+      </div>
+      <div class="absolute bottom-2">
+        <button type="button" (click)="validated(cal.id)" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">valider</button>
+        <button type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-blue-800">invalider</button>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+

@@ -18,4 +18,16 @@ export class SessionService {
   get():Observable<Data>{
     return this.http.get<Data>(this.api+'session')
   }
+  cancelSession(session:number):Observable<Data>{
+    return this.http.get<Data>(this.api+'session/cancel/'+session)
+  }
+  validatedSession(session:number):Observable<Data>{
+    return this.http.get<Data>(this.api+'session/validated/'+session)
+  }
+  invalidatedSession(session:number):Observable<Data>{
+    return this.http.get<Data>(this.api+'session/invalidated/'+session)
+  }
+  getSessionByprof(prof:number):Observable<Data>{
+    return this.http.get<Data>(this.api+'session/prof'+prof)
+  }
 }

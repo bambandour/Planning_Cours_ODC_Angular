@@ -1,3 +1,5 @@
+import { Time } from "@angular/common"
+import { CalendarEvent } from "angular-calendar"
 
 export interface Data {
     message: string
@@ -42,13 +44,13 @@ export interface ProfModule {
     prof: string
 }
 
-export interface Session {
+export interface Session extends CalendarEvent {
     id: number
     date: string
-    heure_debut: number
-    heure_fin: number
+    heure_debut: Time
+    heure_fin: Time
     duree: number
-    cours: Cours|number
+    cours: Cours
     type_session: string
     salle: string
     etat: number

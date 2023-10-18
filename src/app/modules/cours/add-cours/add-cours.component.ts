@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { initFlowbite } from 'flowbite';
 import { CoursService } from 'src/app/services/cours.service';
 
 @Component({
@@ -17,8 +18,9 @@ export class AddCoursComponent {
       classes: this.fb.array([])
     });
   }
+  
   ngOnInit(){
-    
+    initFlowbite();
   }
   
   get classes() {

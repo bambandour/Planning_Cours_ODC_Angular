@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CoursRoutingModule } from './cours-routing.module';
 import { CoursComponent } from './cours.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AddCoursComponent } from './add-cours/add-cours.component';
 import { FilterPipe } from './filter.pipe';
@@ -39,6 +39,7 @@ class CostumDateFormatter extends CalendarNativeDateFormatter{
     CoursRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule,
     // BrowserAnimationsModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],

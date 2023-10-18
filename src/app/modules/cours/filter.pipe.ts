@@ -3,7 +3,7 @@ import { ModuleTeardownOptions } from '@angular/core/testing';
 import { Cours } from 'src/app/cours';
 
 @Pipe({
-  name: 'filter'
+  name: 'filter'  
 })
 export class FilterPipe implements PipeTransform {
 
@@ -19,13 +19,13 @@ export class FilterPipe implements PipeTransform {
         moduleMatch = item.prof_module.module.toLocaleLowerCase()===module.toLocaleLowerCase()
       }
 
+      if (className) {
+        classMatch = item.annee_classe.classe.libelle.toLowerCase() === className.toLowerCase();
+      }
       // if (hours) {
       //   hoursMatch = item.hours >= hours;
       // }
 
-      // if (className) {
-      //   classMatch = item.className.toLowerCase() === className.toLowerCase();
-      // }
 
       return moduleMatch ;
     });

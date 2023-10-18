@@ -8,18 +8,19 @@ import { SessionService } from 'src/app/services/session.service';
 import { min } from 'rxjs';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cours',
   templateUrl: './cours.component.html',
-  styleUrls: ['./cours.component.css']
+  styleUrls: ['./cours.component.css'],
 })
 export class CoursComponent {
 
   formGroup!:FormGroup
   cours:Cours[]=[]
-  selectedFilter: string = 'class';
-  searchTerm: string = '';
+  selectedFilter: string = 'state';
+  searchText: string = '';
   selectedModule:string=''
   selectedHours:number=0
   selectedClass:string=''
@@ -49,8 +50,9 @@ export class CoursComponent {
     this.getAllCours()
     this.getSessionAndSalle()
     let current_user=localStorage.getItem('current_user')
-    console.log(current_user);
-    this.user=current_user
+    // console.log(current_user);
+    this.user=current_user;
+    this.performSearch()
     
   }
   
@@ -72,6 +74,8 @@ export class CoursComponent {
   getAllCours(){
     this.coursService.get().subscribe((res:any)=>{
       this.cours=res.data
+      // console.log(res.data);
+      
     })
   }
 
@@ -102,10 +106,11 @@ export class CoursComponent {
       }
       console.log(data);
       
-    // this.sessionservice.add(data).subscribe(res=>{
-    //     console.log(res);
-    //     this.formGroup.reset();
-    // })
+    this.sessionservice.add(data).subscribe(res=>{
+        console.log(res);
+        this.formGroup.reset();
+        this.router.navigate(['/session'])
+    })
     }
   }
   // isSalleDispo(){
@@ -121,6 +126,24 @@ export class CoursComponent {
     this.authService.logout().subscribe(res=>{
       this.router.navigate(['']);
     })
+  }
+
+ 
+
+  performSearch() {
+    if (this.selectedFilter === 'class') {
+      this.cours = this.cours.filter(cour => cour.annee_classe.classe.libelle === this.searchText);
+    } else if (this.selectedFilter === 'module') {
+      this.cours = this.cours.filter(cour => cour.prof_module.module === this.searchText);
+    } else if (this.selectedFilter === 'hours') {
+      
+    } else if (this.selectedFilter === 'state') {
+      if (this.searchText === 'termine') {
+        this.cours = this.cours.filter(cour => cour.etat === true);
+      } else if (this.searchText === 'pending') {
+        this.cours = this.cours.filter(cour => cour.etat === false);
+      }
+    }
   }
   
 

@@ -8,8 +8,8 @@
           <div class="flex items-center justify-start pl-3 bg-green-600 border-none md:justify-center w-14 md:w-64 h-14 dark:bg-gray-800">
             <img class="mr-2 overflow-hidden rounded-md w-7 h-7 md:w-10 md:h-10" src="assets/img/odc.jpeg" />
             <div>
-                <span class="hidden md:block text-white-900">Ahmadou Ndour</span>
-                <span class="hidden text-white-900 md:block">res@gmail.com</span>
+                <span class="hidden md:block text-white-900">Bamba Ndour</span>
+                <span class="hidden text-white-900 md:block">bambandour115@gmail.com</span>
             </div>
           </div>
           <div class="flex items-center justify-between bg-green-600 h-14 dark:bg-gray-800 header-right">
@@ -62,7 +62,7 @@
                   <span class="inline-flex items-center justify-center ml-4">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
                   </span>
-                  <span class="ml-2 text-sm tracking-wide truncate">Board</span>
+                  <span class="ml-2 text-sm tracking-wide truncate">Registration</span>
                   <span class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-blue-500 bg-indigo-50 rounded-full">New</span>
                 </a>
               </li>
@@ -112,7 +112,7 @@
         </div>
       
         <div class="h-full mb-10 ml-14 mt-14 md:ml-64">
-            <div class="flex-col items-center justify-center p-6">
+            <div class="relative flex-col items-center justify-center p-6">
                 <!-- <div class="items-center">
                     <h1 class="items-center justify-center pt-6 text-4xl font-bold text-gray-700">Planning Course</h1>
                 </div> -->
@@ -128,8 +128,18 @@
                       <option value="hours">hours</option>
                       <option value="state">state</option>
                   </select>
-                    <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Dev Web" required>
-                    <button type="button"  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mt-1.5">Search</button>
+                    <input type="text" [(ngModel)]="searchText" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Dev Web" required>
+                    <button type="button" (click)="performSearch()"  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mt-1.5">Search</button>
+                </div>
+                <div class="absolute right-10 top-5">
+                  <div>
+                    <span class="text-blue-700"><i class="fa-solid fa-calendar-days"></i> </span>
+                    <span class="p-2 font-bold text-red-500">2022-2023</span>
+                  </div>
+                  <div>
+                    <span class="font-bold text-blue-700">Semestre: </span>
+                    <span class="p-2 font-bold text-red-500">1</span>
+                  </div>
                 </div>
                 
               </div>

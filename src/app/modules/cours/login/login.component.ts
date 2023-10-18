@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { initFlowbite } from 'flowbite';
 import { LoginService } from 'src/app/services/login.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -18,6 +19,7 @@ export class LoginComponent {
     });
   }
   login() {
+    initFlowbite();
     if (this.formGroup.valid) {
       this.authService.login(this.formGroup.value).subscribe(res => {
         localStorage.setItem('token',res.token)
