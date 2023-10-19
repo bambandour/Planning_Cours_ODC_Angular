@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { Data, Session } from '../cours';
+import { Data, Root, Session } from '../cours';
 import { ParentService } from './parent.service';
 
 @Injectable({
@@ -29,5 +29,8 @@ export class SessionService {
   }
   getSessionByprof(prof:number):Observable<Data>{
     return this.http.get<Data>(this.api+'session/prof'+prof)
+  }
+  notification():Observable<Root>{
+    return this.http.get<Root>(this.api+'demande')
   }
 }

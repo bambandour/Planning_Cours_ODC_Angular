@@ -4,6 +4,7 @@ import { AddCoursComponent } from './add-cours/add-cours.component';
 import { authGuard } from './auth.guard';
 import { CoursComponent } from './cours.component';
 import { LoginComponent } from './login/login.component';
+import { NotificationComponent } from './notification/notification.component';
 import { SessionComponent } from './session/session.component';
 
 const routes: Routes = [
@@ -19,6 +20,9 @@ const routes: Routes = [
     {
       path: 'cours', component: CoursComponent,canActivate: [authGuard]
     },
+    // {
+    //   path: 'notifications', component: NotificationComponent,canActivate: [authGuard]
+    // },
     {
       path: '', component: LoginComponent
     },

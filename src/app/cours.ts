@@ -8,6 +8,27 @@ export interface Data {
     error?: string
 }
 
+export interface Root {
+  message: string
+  data: Notification[]
+  success?: boolean
+  error?: string
+}
+
+export interface Notification {
+  id: number
+  motif: string
+  statut: string
+  session: Session
+}
+
+export interface ClassElfe {
+  id: number
+  classe: Classe
+  eleves: User[]
+  effectif: number
+}
+
 export interface data {
     session: Session[]
     salle: Salle[]
@@ -34,7 +55,7 @@ export interface Classe {
     id: number
     libelle: string
     filiere: string
-    effectif: number
+    effectif?: number
     niveau: string
 }
 

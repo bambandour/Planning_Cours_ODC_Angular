@@ -1,0 +1,29 @@
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { initFlowbite } from 'flowbite';
+import { Notification } from 'src/app/cours';
+import { SessionService } from 'src/app/services/session.service';
+
+@Component({
+  selector: 'app-notification',
+  templateUrl: './notification.component.html',
+  styleUrls: ['./notification.component.css']
+})
+export class NotificationComponent {
+  notifications:Notification[]=[]
+  notifyLength!:number
+  constructor(private notService:SessionService, private router:Router){}
+  ngOnInit(){
+    initFlowbite()
+    this.notService.notification().subscribe(res=>{
+      this.notifications=res.data
+      this.notifyLength=res.data.length
+    })
+  }
+  cancelSession(session:number){
+    this.notService.cancelSession(session).subscribe(res=>{
+      this.notifications=this.notifications.filter(not=>not.statut==="pending")
+      // console.log(res);
+    })
+  }
+}

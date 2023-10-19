@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddCoursComponent } from './modules/cours/add-cours/add-cours.component';
 import { authGuard } from './modules/cours/auth.guard';
+import { ClasseComponent } from './modules/cours/classe/classe.component';
 import { CoursComponent } from './modules/cours/cours.component';
 import { LoginComponent } from './modules/cours/login/login.component';
+import { NotificationComponent } from './modules/cours/notification/notification.component';
 import { SessionComponent } from './modules/cours/session/session.component';
 
 const routes: Routes = [{ path: 'cours', loadChildren: () => import('./modules/cours/cours.module').then(m => m.CoursModule) },
@@ -14,7 +16,13 @@ const routes: Routes = [{ path: 'cours', loadChildren: () => import('./modules/c
       path: 'add-cours', component: AddCoursComponent,canActivate: [authGuard]
     },
     {
-      path: 'cour', component: CoursComponent,canActivate: [authGuard]
+      path: 'cours', component: CoursComponent,canActivate: [authGuard]
+    },
+    {
+      path: 'notifications', component: NotificationComponent,canActivate: [authGuard]
+    },
+    {
+      path: 'classes', component: ClasseComponent,canActivate: [authGuard]
     },
     {
       path: '', component: LoginComponent

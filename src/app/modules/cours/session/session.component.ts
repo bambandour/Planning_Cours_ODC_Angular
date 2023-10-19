@@ -20,6 +20,7 @@ export class SessionComponent {
   sessions:Session[]=[]
   isModalOpen:boolean=false;
   router!:Router
+  notifyLength!:number
   constructor(private fb:FormBuilder, private sessionService:SessionService){
     
   }
@@ -51,6 +52,9 @@ export class SessionComponent {
         this.events.push(event);
       });
     });
+    this.sessionService.notification().subscribe(res=>{
+      this.notifyLength=res.data.length
+    })
   }
 
 

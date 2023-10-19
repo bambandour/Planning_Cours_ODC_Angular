@@ -18,8 +18,10 @@ export class LoginComponent {
       password: ['',[Validators.required, Validators.minLength(4)]]
     });
   }
-  login() {
+  ngOnInit(){
     initFlowbite();
+  }
+  login() {
     if (this.formGroup.valid) {
       this.authService.login(this.formGroup.value).subscribe(res => {
         localStorage.setItem('token',res.token)

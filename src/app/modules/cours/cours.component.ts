@@ -29,6 +29,7 @@ export class CoursComponent {
   salles:Salle[]=[]
   courId!:number
   user:string|null=''
+  notifyLength!:number
 
 
   constructor(private fb:FormBuilder, private coursService:CoursService,private sessionservice:SessionService, private authService:LoginService,private router:Router){
@@ -53,6 +54,9 @@ export class CoursComponent {
     // console.log(current_user);
     this.user=current_user;
     this.performSearch()
+    this.sessionservice.notification().subscribe(res=>{
+      this.notifyLength=res.data.length
+    })
     
   }
   
