@@ -6,6 +6,7 @@ import { ClasseComponent } from './modules/cours/classe/classe.component';
 import { CoursComponent } from './modules/cours/cours.component';
 import { LoginComponent } from './modules/cours/login/login.component';
 import { NotificationComponent } from './modules/cours/notification/notification.component';
+import { RegistrationComponent } from './modules/cours/registration/registration.component';
 import { SessionComponent } from './modules/cours/session/session.component';
 
 const routes: Routes = [{ path: 'cours', loadChildren: () => import('./modules/cours/cours.module').then(m => m.CoursModule) },
@@ -23,6 +24,9 @@ const routes: Routes = [{ path: 'cours', loadChildren: () => import('./modules/c
     },
     {
       path: 'classes', component: ClasseComponent,canActivate: [authGuard]
+    },
+    {
+      path: 'registration', component: RegistrationComponent,canActivate: [authGuard]
     },
     {
       path: '', component: LoginComponent

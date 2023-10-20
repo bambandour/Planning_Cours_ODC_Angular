@@ -15,6 +15,13 @@ export interface Root {
   error?: string
 }
 
+export interface Classroom {
+  message: string
+  data: ClassElfe[]
+  success?: boolean
+  error?: string
+}
+
 export interface Notification {
   id: number
   motif: string
