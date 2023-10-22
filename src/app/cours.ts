@@ -94,7 +94,7 @@ export interface Session extends CalendarEvent {
     id:number
     nom:string
     prenom:string
-    email:string
+    login:string
     date_naissance?:string
     grade?:string
     specialite?:string

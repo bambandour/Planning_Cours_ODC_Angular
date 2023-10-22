@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { initFlowbite } from 'flowbite';
-import { Session } from 'src/app/cours';
+import { Session, User } from 'src/app/cours';
 import { SessionService } from 'src/app/services/session.service';
 
 @Component({
@@ -21,14 +21,19 @@ export class SessionComponent {
   isModalOpen:boolean=false;
   router!:Router
   notifyLength!:number
+  user!:User
   constructor(private fb:FormBuilder, private sessionService:SessionService){
     
   }
   
   ngOnInit() {
     initFlowbite();
+    let current_user=JSON.parse(localStorage.getItem('current_user')!)
+    this.user=current_user;
     this.sessionService.get().subscribe((res: any) => {
       this.sessions = res.data.session;
+      console.log(res.data);
+      
       this.sessions.forEach(session => {
         const event = {
           title:`<p>${session.cours.prof_module.module}</p>

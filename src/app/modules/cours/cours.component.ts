@@ -28,7 +28,7 @@ export class CoursComponent {
   isModalOpen = false;
   salles:Salle[]=[]
   courId!:number
-  user:string|null=''
+  user!:User
   notifyLength!:number
 
 
@@ -50,8 +50,7 @@ export class CoursComponent {
     initFlowbite();
     this.getAllCours()
     this.getSessionAndSalle()
-    let current_user=localStorage.getItem('current_user')
-    // console.log(current_user);
+    let current_user=JSON.parse(localStorage.getItem('current_user')!)
     this.user=current_user;
     this.performSearch()
     this.sessionservice.notification().subscribe(res=>{
@@ -79,7 +78,6 @@ export class CoursComponent {
     this.coursService.get().subscribe((res:any)=>{
       this.cours=res.data
       // console.log(res.data);
-      
     })
   }
 

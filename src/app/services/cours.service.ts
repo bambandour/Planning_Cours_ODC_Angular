@@ -10,6 +10,7 @@ import { Cours } from '../interfaces/planning';
 })
 export class CoursService {
   public api:string=environment.apiUrl
+  user=JSON.parse(localStorage.getItem('current_user')!)
   constructor(private http:HttpClient) { }
 
   add(cours:Cours):Observable<Data>{
@@ -17,7 +18,7 @@ export class CoursService {
   }
 
   get():Observable<Data>{
-    return this.http.get<Data>(this.api+'cours')
+    return this.http.get<Data>(this.api+'role/'+this.user.role+'/user/'+this.user.id+'/cours')
   }
 
 }

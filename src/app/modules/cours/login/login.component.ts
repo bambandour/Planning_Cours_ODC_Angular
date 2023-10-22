@@ -24,7 +24,7 @@ export class LoginComponent {
   login() {
     if (this.formGroup.valid) {
       this.authService.login(this.formGroup.value).subscribe(res => {
-        localStorage.setItem('token',res.token)
+        localStorage.setItem('token',JSON.stringify(res.token))
         localStorage.setItem('current_user',JSON.stringify(res.user))
         // this.userService.setCurrentUser(res.user.nomComplet);
         this.router.navigate(['/cours']);

@@ -8,8 +8,8 @@
           <div class="flex items-center justify-start pl-3 bg-green-600 border-none md:justify-center w-14 md:w-64 h-14 dark:bg-gray-800">
             <img class="mr-2 overflow-hidden rounded-md w-7 h-7 md:w-10 md:h-10" src="assets/img/odc.jpeg" />
             <div>
-                <span class="hidden md:block text-white-900">Bamba Ndour</span>
-                <span class="hidden text-white-900 md:block">bambandour115@gmail.com</span>
+                <span class="hidden md:block text-white-900">{{user.prenom}} {{user.nom}}</span>
+                <span class="hidden text-white-900 md:block">{{user.login}}</span>
             </div>
           </div>
           <div class="flex items-center justify-between bg-green-600 h-14 dark:bg-gray-800 header-right">
@@ -79,7 +79,8 @@
               <li>
                 <a href="" routerLink="/session" class="relative flex flex-row items-center pr-6 border-l-4 border-transparent h-11 focus:outline-none hover:bg-green-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 hover:border-blue-500 dark:hover:border-gray-800">
                   <span class="inline-flex items-center justify-center ml-4">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                    <i class="fa-solid fa-book"></i>
+                    <!-- <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg> -->
                   </span>
                   <span class="ml-2 text-sm tracking-wide truncate">Course Sessions</span>
                  
@@ -89,7 +90,8 @@
               <li>
                 <a href="" routerLink="/classes" class="relative flex flex-row items-center pr-6 border-l-4 border-transparent h-11 focus:outline-none hover:bg-green-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 hover:border-blue-500 dark:hover:border-gray-800">
                   <span class="inline-flex items-center justify-center ml-4">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                  <i class="fa-solid fa-school"></i>
+                    <!-- <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg> -->
                   </span>
                   <span class="ml-2 text-sm tracking-wide truncate">Class</span>
                   <!-- <span class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">1.2k</span> -->
@@ -149,14 +151,14 @@
               <div class="p-10 ml-10" data-modal-target="authentication-modal"
                                       data-modal-toggle="authentication-modal">
                 <div class="grid grid-cols-3 gap-6 content-evenly">
-                    <!-- <div class="column" *ngFor="let cour of cours|filter: selectedModule"> -->
-                      <div class="column" *ngFor="let cour of cours | filter: selectedModule: selectedHours: selectedClass">
+                    <div class="column" *ngFor="let cour of cours">
+                      <!-- <div class="column" *ngFor="let cour of cours | filter: selectedModule: selectedHours: selectedClass"> -->
                         <div class="flex flex-col items-center max-w-md p-6 border border-gray-200 rounded-lg shadow bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                             <h5 class="font-bold tracking-tight text-center text-blue-600 dark:text-white">{{cour.prof_module.prof}}</h5>
                             <p class="text-2xl font-bold text-gray-700 dark:text-gray-400">{{cour.prof_module.module}}</p>
                             <p class="font-bold text-red-600 dark:text-gray-400">{{cour.annee_classe.classe.libelle}}</p>
                             <p class="font-bold text-green-600 dark:text-gray-400">{{cour.heure_globale}}h</p>
-                            <div class="flex items-center justify-between w-full pb-1">
+                            <div *ngIf="this.user.role==='RP'" class="flex items-center justify-between w-full pb-1">
                                 <p class="justify-start"><button type="button"><i class="fa-solid fa-circle-info"></i></button></p>
                                 <p class="pt-2 text-2xl text-blue-800" ><button
                                     data-modal-target="authentication-modal"

@@ -20,7 +20,9 @@ const routes: Routes = [{ path: 'cours', loadChildren: () => import('./modules/c
       path: 'cours', component: CoursComponent,canActivate: [authGuard]
     },
     {
-      path: 'notifications', component: NotificationComponent,canActivate: [authGuard]
+      path: 'notifications', component: NotificationComponent,canActivate: [authGuard],data: {
+        requiredRole: 'RP' 
+      }
     },
     {
       path: 'classes', component: ClasseComponent,canActivate: [authGuard]
