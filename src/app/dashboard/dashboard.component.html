@@ -1,8 +1,4 @@
-<div >
-    <div class="flex flex-col flex-auto flex-shrink-0 min-h-screen antialiased text-black bg-white dark:bg-gray-700 dark:text-white">
-
-      <!-- Header -->
-      <!-- <div class="fixed z-10 flex items-center justify-between w-full text-white h-14">
+<div class="fixed z-10 flex items-center justify-between w-full text-white h-14">
         <div class="flex items-center justify-start pl-3 bg-green-600 border-none md:justify-center w-14 md:w-64 h-14 dark:bg-gray-800">
           <img class="mr-2 overflow-hidden rounded-md w-7 h-7 md:w-10 md:h-10" src="assets/img/odc.jpeg" />
           <div>
@@ -53,7 +49,7 @@
                 <span class="ml-2 text-sm tracking-wide truncate">Dashboard</span>
               </a>
             </li>
-            <li *ngIf="role==='RP'">
+            <li *ngIf="this.user.role==='RP'">
               <a href="" routerLink="/registration" class="relative flex flex-row items-center pr-6 border-l-4 border-transparent h-11 focus:outline-none hover:bg-green-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 hover:border-blue-500 dark:hover:border-gray-800">
                 <span class="inline-flex items-center justify-center ml-4">
                     <i class="fa-solid fa-users"></i>
@@ -83,7 +79,7 @@
               </a>
             </li>
             
-            <li>
+            <li *ngIf="this.user.role==='RP'">
               <a href="" routerLink="/classes" class="relative flex flex-row items-center pr-6 border-l-4 border-transparent h-11 focus:outline-none hover:bg-green-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 hover:border-blue-500 dark:hover:border-gray-800">
                 <span class="inline-flex items-center justify-center ml-4">
                   <i class="fa-solid fa-school"></i>
@@ -94,7 +90,7 @@
               </a>
             </li>
             
-            <li *ngIf="role==='RP'">
+            <li *ngIf="this.user.role==='RP'">
               <a href="" routerLink="/notifications" class="relative flex flex-row items-center pr-6 border-l-4 border-transparent h-11 focus:outline-none hover:bg-green-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 hover:border-blue-500 dark:hover:border-gray-800">
                 <span class="inline-flex items-center justify-center ml-4">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
@@ -110,27 +106,5 @@
           <p class="hidden px-5 py-3 text-xs text-center mb-14 md:block">Copyright @2023</p>
         </div>
       </div>
-     -->
-     <app-dashboard></app-dashboard>
-      <div class="flex items-center justify-center h-full mb-10 ml-14 mt-14 md:ml-64">
-        <div class="items-center p-10 " >
-            <div class="">
-                <h1 class="p-4 text-4xl text-gray-600 ">Inscription des étudiants par classes</h1>
-            </div>
-            <form action="" [formGroup]="formGroup" (ngSubmit)="uploadFileExcel()">
-                <div class="flex gap-6 p-6">
-                    <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
-                        <input formControlName="excel" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
-                    </div>
-                    <div class="pt-5">
-                        <button type="submit"  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">save</button>
-                    </div>
-                </div>
-            </form>
-            
-        </div>          
-      </div>
-
-    </div>
-  </div>   
+    
+     

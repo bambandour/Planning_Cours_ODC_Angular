@@ -32,8 +32,7 @@ export class SessionComponent {
     this.user=current_user;
     this.sessionService.get().subscribe((res: any) => {
       this.sessions = res.data.session;
-      console.log(res.data);
-      
+      // console.log(res.data);
       this.sessions.forEach(session => {
         const event = {
           title:`<p>${session.cours.prof_module.module}</p>
@@ -52,7 +51,6 @@ export class SessionComponent {
           type_session: session.type_session,
           salle: session.salle,
           etat: session.etat,
-
         };
         this.events.push(event);
       });
@@ -61,7 +59,6 @@ export class SessionComponent {
       this.notifyLength=res.data.length
     })
   }
-
 
   onClickEvents(event:any) {
     this.cal=event.event

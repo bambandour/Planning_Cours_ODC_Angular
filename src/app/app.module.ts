@@ -14,6 +14,7 @@ import { fr } from 'date-fns/locale';
 import { LoginComponent } from './modules/cours/login/login.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthTokenInterceptor } from './modules/cours/auth.interceptor';
+// import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 registerLocaleData(localeFr,fr)
@@ -30,6 +31,7 @@ class CostumDateFormatter extends CalendarNativeDateFormatter{
   declarations: [
     AppComponent,
     LoginComponent,
+    // DashboardComponent,
   ],
   imports: [
     BrowserModule,

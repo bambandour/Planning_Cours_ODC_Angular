@@ -12,7 +12,8 @@ import { SessionService } from 'src/app/services/session.service';
 export class RegistrationComponent {
   notLength!:number
   formGroup!:FormGroup
-  user!:User
+  user!:User;
+  role:string=""
 
   constructor(private notifyService:SessionService, private classeService:ClasseService, private fb:FormBuilder){
     this.formGroup=this.fb.group({
@@ -22,6 +23,9 @@ export class RegistrationComponent {
   ngOnInit(){
     let current_user=JSON.parse(localStorage.getItem('current_user')!)
     this.user=current_user;
+    this.role=this.user.role;
+    console.log(this.user);
+    
     this.notifyService.notification().subscribe(res=>{
       this.notLength=res.data.length
     })
