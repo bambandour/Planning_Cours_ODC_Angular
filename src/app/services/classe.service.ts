@@ -16,7 +16,9 @@ export class ClasseService {
     return this.http.get<Classroom>(this.api+'classes')
   }
 
-  importStudents(file:any):Observable<any>{
-    return this.http.post(this.api+'import',file)
+  importStudents(file:File){
+    const formData:FormData=new FormData();
+    formData.append('file',file,file.name);
+    return this.http.post(this.api+'import',formData)
   }
 }

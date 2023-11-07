@@ -14,6 +14,7 @@ import { fr } from 'date-fns/locale';
 import { LoginComponent } from './modules/cours/login/login.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthTokenInterceptor } from './modules/cours/auth.interceptor';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 // import { DashboardComponent } from './dashboard/dashboard.component';
 
 
@@ -41,7 +42,8 @@ class CostumDateFormatter extends CalendarNativeDateFormatter{
     BrowserAnimationsModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
     FormsModule,
-    HttpClientXsrfModule 
+    HttpClientXsrfModule ,
+    SweetAlert2Module.forRoot(),
   ],
   providers: [
     {

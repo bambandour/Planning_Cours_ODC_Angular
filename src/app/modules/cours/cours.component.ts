@@ -9,6 +9,8 @@ import { min } from 'rxjs';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-cours',
@@ -107,30 +109,34 @@ export class CoursComponent {
       cours:this.courId
       }
       console.log(data);
-      
-    this.sessionservice.add(data).subscribe(res=>{
-        console.log(res);
+      this.sessionservice.add(data).subscribe(res=>{
+        if (res.success==true) {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: res.message,
+            showConfirmButton: false,
+            timer: 2500
+          })
+        }else
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: res.message,
+          showConfirmButton: false,
+          timer: 2500
+        })
+        this.router.navigate(['/cours'])
         this.formGroup.reset();
-        this.router.navigate(['/session'])
     })
     }
   }
-  // isSalleDispo(){
-    //   const cour=this.formGroup.value.cours
-    //   this.cours.forEach(c => {
-    //     if (cour===c.id) {
-          
-    //     }
-    //   });
-    //   return
-    // }
+ 
   singUp(){
     this.authService.logout().subscribe(res=>{
       this.router.navigate(['']);
     })
   }
-
- 
 
   performSearch() {
     if (this.selectedFilter === 'class') {
@@ -148,7 +154,4 @@ export class CoursComponent {
     }
   }
   
-
-
-
 }

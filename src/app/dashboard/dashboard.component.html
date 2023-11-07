@@ -22,7 +22,7 @@
             </li>
             <li>
               <a href="" class="flex items-center mr-4 hover:text-blue-100">
-                <span class="inline-flex mr-1">
+                <span (click)=" singUp()" class="inline-flex mr-1">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                 </span>
                 Logout
@@ -53,7 +53,6 @@
               <a href="" routerLink="/registration" class="relative flex flex-row items-center pr-6 border-l-4 border-transparent h-11 focus:outline-none hover:bg-green-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 hover:border-blue-500 dark:hover:border-gray-800">
                 <span class="inline-flex items-center justify-center ml-4">
                     <i class="fa-solid fa-users"></i>
-                 
                 </span>
                 <span class="ml-2 text-sm tracking-wide truncate">Registration</span>
                 <span class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-blue-500 bg-indigo-50 rounded-full">New</span>
@@ -63,7 +62,6 @@
               <a href="" routerLink="/cours" class="relative flex flex-row items-center pr-6 border-l-4 border-transparent h-11 focus:outline-none hover:bg-green-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 hover:border-blue-500 dark:hover:border-gray-800">
                 <span class="inline-flex items-center justify-center ml-4">
                     <i class="fa-solid fa-book"></i>
-                
                 </span>
                 <span  class="ml-2 text-sm tracking-wide truncate">Courses</span>
               </a>
@@ -71,25 +69,20 @@
             <li>
               <a href="" routerLink="/session" class="relative flex flex-row items-center pr-6 border-l-4 border-transparent h-11 focus:outline-none hover:bg-green-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 hover:border-blue-500 dark:hover:border-gray-800">
                 <span class="inline-flex items-center justify-center ml-4">
-                    <i class="fa-solid fa-book"></i>
-               
+                  <i class="fa-solid fa-calendar"></i>
                 </span>
-                <span  class="ml-2 text-sm tracking-wide truncate">Course Sessions</span>
+                <span  class="ml-2 text-sm tracking-wide truncate">Sessions Calendar</span>
                
               </a>
             </li>
-            
             <li *ngIf="this.user.role==='RP'">
               <a href="" routerLink="/classes" class="relative flex flex-row items-center pr-6 border-l-4 border-transparent h-11 focus:outline-none hover:bg-green-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 hover:border-blue-500 dark:hover:border-gray-800">
                 <span class="inline-flex items-center justify-center ml-4">
                   <i class="fa-solid fa-school"></i>
-               
                 </span>
                 <span  class="ml-2 text-sm tracking-wide truncate">Class</span>
-              
               </a>
             </li>
-            
             <li *ngIf="this.user.role==='RP'">
               <a href="" routerLink="/notifications" class="relative flex flex-row items-center pr-6 border-l-4 border-transparent h-11 focus:outline-none hover:bg-green-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 hover:border-blue-500 dark:hover:border-gray-800">
                 <span class="inline-flex items-center justify-center ml-4">

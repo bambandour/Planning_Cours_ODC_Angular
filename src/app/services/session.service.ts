@@ -38,4 +38,7 @@ export class SessionService {
   notification():Observable<Root>{
     return this.http.get<Root>(this.api+'demande')
   }
+  demande(demande:{session:number, motif:string}):Observable<Root>{
+    return this.http.post<Root>(this.api+'demande',demande)
+  }
 }

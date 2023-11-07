@@ -20,6 +20,9 @@ import { NotificationComponent } from './notification/notification.component';
 import { ClasseComponent } from './classe/classe.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { DashboardComponent } from 'src/app/dashboard/dashboard.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
+
 
 registerLocaleData(localeFr,fr)
 class CostumDateFormatter extends CalendarNativeDateFormatter{
@@ -49,7 +52,9 @@ class CostumDateFormatter extends CalendarNativeDateFormatter{
     HttpClientModule,
     FormsModule,
     // BrowserAnimationsModule,
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    SweetAlert2Module.forRoot(),
+
   ],
   providers:[
     {

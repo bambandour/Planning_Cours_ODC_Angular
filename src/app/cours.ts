@@ -46,6 +46,8 @@ export interface Cours {
     annee_classe: AnneeClasse
     prof_module: ProfModule
     heure_globale: number
+    heure_restante: number
+    heure_planifie: number
     etat: boolean
 } 
 export interface AnneeSemestre {

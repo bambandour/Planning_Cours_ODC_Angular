@@ -11,7 +11,6 @@ export class FilterPipe implements PipeTransform {
     if (!items) return [];
     return items.filter(item => {
       let moduleMatch = true;
-
       let hoursMatch = true;
       let classMatch = true;
 

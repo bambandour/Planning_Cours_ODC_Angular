@@ -113,7 +113,7 @@
                     <h1 class="items-center justify-center pt-6 text-4xl font-bold text-gray-700">Planning Course</h1>
                 </div> -->
                 <div class="flex items-center justify-center gap-3">
-                  <div class="">
+                  <div *ngIf="this.user.role==='RP'" class="">
                     <a href="" routerLink="/add-cours">
                     <button type="button" class="focus:outline-none text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Add</button>
                   </a>
@@ -149,30 +149,36 @@
                             <h5 class="font-bold tracking-tight text-center text-blue-600 dark:text-white">{{cour.prof_module.prof}}</h5>
                             <p class="text-2xl font-bold text-gray-700 dark:text-gray-400">{{cour.prof_module.module}}</p>
                             <p class="font-bold text-red-600 dark:text-gray-400">{{cour.annee_classe.classe.libelle}}</p>
-                            <p class="font-bold text-green-600 dark:text-gray-400">{{cour.heure_globale}}H</p>
-                            <!-- <p class="font-bold text-green-600 dark:text-gray-400">État: {{ cour.etat === 0 ? 'En cours' : 'Terminé' }}</p -->
+                            <p class="font-bold text-black dark:text-gray-400"><span class="text-green-600">Heure Globale: {{cour.heure_globale}}H</span></p>
+                            <!-- <p class="font-bold dark:text-gray-400"><span class="text-red-600">H_Restante: {{cour.heure_restant}}H</span></p> -->
+                            <p class="font-bold text-blue-600 dark:text-gray-400">
+                              Planifiée:{{ cour.heure_planifie }}H
+                            </p>
+                            <p class="font-bold text-gray-600 dark:text-gray-400">{{ cour.etat == false ? 'En cours' : 'Terminé' }}</p>
                             <div *ngIf="this.user.role==='RP'" class="flex items-center justify-between w-full pb-1">
                                 <p class="justify-start"><button type="button"><i class="fa-solid fa-circle-info"></i></button></p>
-                                <p class="pt-2 text-2xl text-blue-800" ><button
+                                
+                                <div class="flex justify-end">
+                                  <p class="pt-2 text-2xl text-blue-800" ><button
                                     data-modal-target="authentication-modal"
                                     data-modal-toggle="authentication-modal"
                                     (click)="onClickCourse(cour.id)"
                                     type="button"
                                     ><i class="fa-solid fa-plus" ></i></button></p>
-                                <div class="flex justify-end">
-                                    <p class="text-red-600"><button type="button"><i class="fa-solid fa-trash"></i></button></p>
-                                    <p class="ml-2 text-yellow-400"><button type="button"><i class="fa-solid fa-pen-to-square"></i></button></p>
+                                    <!-- <p class="text-red-600"><button type="button"><i class="fa-solid fa-trash"></i></button></p> -->
+                                    <!-- <p class="ml-2 text-yellow-400"><button type="button"><i class="fa-solid fa-pen-to-square"></i></button></p> -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
               </div>              
-          
         </div>
 
       </div>
     </div>    
+
+    
     
 
 
@@ -180,26 +186,26 @@
 
 <!-- Main modal -->
 <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative w-full max-w-md max-h-full">
+    <div class="relative w-full max-w-lg max-h-full">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
-                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <svg class="w-3 h-3" aria-hidden="true" fill="none" viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                 </svg>
                 <span class="sr-only">Close modal</span>
             </button>
             <div class="px-6 py-6 lg:px-8">
-                <h3 class="mb-4 text-2xl font-medium text-center text-gray-900 text-blue-600 dark:text-white">Planning Session</h3>
+                <h3 class="mb-4 text-2xl font-medium text-center text-gray-900 text-blue-600 dark:text-white">Course Session Planning</h3>
                 <form class="space-y-6" action="" [formGroup]="formGroup" (ngSubmit)="onSubmitSession()">
                   <div class="flex flex-wrap -mx-3">
-                    <div class="w-full px-3 sm:w-1/2">
+                    <div class="w-full px-3 sm:w-1/3">
                       <div class="mb-5">
                         <label
                           for="fName"
                           class="mb-3 block text-base font-medium text-[#07074D]"
                         >
-                          Heure_debut
+                          Heure de Début
                         </label>
                         <input
                           type="time"
@@ -208,6 +214,7 @@
                           placeholder="8h"
                           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         />
+                        <div *ngIf="this.formGroup.value.h_debut<7" class="text-red-500">l'heure de debut doit superieur ou egale à 8H</div>
                       </div>
                     </div>
                     <div class="w-full px-3 sm:w-1/2">
@@ -216,7 +223,7 @@
                           for="lName"
                           class="mb-3 block text-base font-medium text-[#07074D]"
                         >
-                          Heure_fin
+                          Heure de Fin
                         </label>
                         <input
                           type="time"
@@ -225,7 +232,7 @@
                           placeholder="9h"
                           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         />
-                        <div *ngIf="this.formGroup.value.h_debut>=this.formGroup.value.h_fin" class="text-red-600">l'heure de fin doit superieur à celle de début</div>
+                        <div *ngIf="this.formGroup.value.h_debut>=this.formGroup.value.h_fin" class="text-red-500">l'heure de fin doit superieur à celle de début</div>
                       </div>
                     </div>
                   </div>
@@ -269,13 +276,14 @@
                     </div>
                   </div>
   
-                  <div class="items-center justify-center ">
+                  <div class="items-center justify-between ">
                     <button
                     [disabled]="this.formGroup.invalid"
                       type="submit"
-                      class="px-8 py-3 text-base font-semibold text-center text-white bg-blue-600 rounded-md outline-none hover:shadow-form">
-                      Submit
+                      class="px-6 py-3 text-base font-semibold text-center text-white bg-blue-600 rounded-md outline-none hover:shadow-form">
+                      Planifier
                     </button>
+                    <button type="button" data-modal-hide="authentication-modal" class="px-6 py-3 text-base font-semibold text-center text-white bg-red-600 rounded-md outline-none hover:shadow-form left-4">annuler</button>                 
                   </div>
                 </form>
             </div>

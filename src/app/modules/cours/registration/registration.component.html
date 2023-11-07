@@ -112,8 +112,58 @@
       </div>
      -->
      <app-dashboard></app-dashboard>
+     
       <div class="flex items-center justify-center h-full mb-10 ml-14 mt-14 md:ml-64">
-        <div class="items-center p-10 " >
+
+        <!-- component -->
+<div class="items-center justify-center p-12 ">
+  <h1 class="p-4 text-4xl text-[#07074D] ">Inscription des étudiants </h1>
+  
+  <div class="mx-auto w-full max-w-[550px] bg-white">
+    <form
+      class="py-6 px-9"
+      [formGroup]="formGroup" (ngSubmit)="uploadFileExcel()"
+    >
+
+      <div class="pt-4 mb-6">
+        <label class="block mb-5 text-xl font-semibold text-green-500">
+          Upload File
+        </label>
+
+        <div class="mb-8">
+          <input type="file" formControlName="excel" (change)="onselectedFile($event)" name="file" id="file" class="sr-only" />
+          <label
+            for="file"
+            class="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center"
+          >
+            <div>
+              <span class="mb-2 block text-xl font-semibold text-[#07074D]">
+                Choose an Excel File
+              </span>
+              <span
+                class="inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D]"
+              >
+                File
+              </span>
+            </div>
+          </label>
+        </div>
+
+      </div>
+
+      <div>
+        <button
+        type="submit"
+          class="w-full px-8 py-3 text-base font-semibold text-center text-white bg-green-500 rounded-md outline-none hover:shadow-form"
+        >
+          Save File
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+        
+        <!-- <div class="items-center p-10 " >
             <div class="">
                 <h1 class="p-4 text-4xl text-gray-600 ">Inscription des étudiants par classes</h1>
             </div>
@@ -121,7 +171,7 @@
                 <div class="flex gap-6 p-6">
                     <div>
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
-                        <input formControlName="excel" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+                        <input formControlName="excel" (change)="onselectedFile($event)" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
                     </div>
                     <div class="pt-5">
                         <button type="submit"  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">save</button>
@@ -129,8 +179,14 @@
                 </div>
             </form>
             
-        </div>          
+        </div>           -->
+      </div>
+      
+      <div *ngIf="isLoader" class="absolute transform translate-x-1/2 translate-y-1/2 right-1/2 bottom-1/2 ">
+        <div class="w-64 h-64 border-4 border-green-400 border-solid rounded-full border-t-transparent animate-spin"></div>
       </div>
 
     </div>
   </div>   
+  
+

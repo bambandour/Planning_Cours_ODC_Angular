@@ -25,7 +25,8 @@ export class NotificationComponent {
   }
   cancelSession(session:number){
     this.notService.cancelSession(session).subscribe(res=>{
-      this.notifications=this.notifications.filter(not=>not.statut==="pending")
+      this.notifications=this.notifications.filter(not=>!(not.statut==="pending"))
+      
       // console.log(res);
     })
   }
